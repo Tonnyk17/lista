@@ -33,8 +33,9 @@ class listaEnlazada:
     def imprimir(self):
         siguiente=self._raiz
         while siguiente != None:
-            print(siguiente._dato,siguiente._inicio)
             siguiente=siguiente._next
+            print(siguiente._dato)
+
     def tamano(self):
         print("Longitud de la lista:",self._longitud)
 
@@ -52,13 +53,33 @@ class listaEnlazada:
             siguiente._next = eliminar._next
             self._longitud -= 1
     
-    def eliminarInicio(self):
-        if self._raiz ==None:
+    def eliminarFinal(self):
+        if self._longitud == 0:
             return False
         else:
             siguiente = self._raiz
-            while siguiente != None:
-                print(siguiente._dato)
+
+            while siguiente._next != None:
+                
+                eliminar = siguiente
+                siguiente = siguiente._next
+            if siguiente != None:
+                eliminar._next = siguiente._next
+            self._longitud -=1
+
+    def insertarPosicion(self,nuevo_nodo,posicion):
+        if self._raiz ==None:
+            self._raiz=nuevo_nodo
+        else:
+            siguiente = self._raiz
+            while siguiente._next == posicion:
+                siguiente = siguiente._next
+                siguiente._next = nuevo_nodo
+
+        
+
+        
+            
 
 n1=nodo(5)
 n2=nodo(6)
@@ -69,7 +90,8 @@ listaSimple = listaEnlazada()
 listaSimple.insertar(n1)
 listaSimple.insertar(n2)
 listaSimple.insertar(n3)
-
-#listaSimple.eliminarSeleccion(n3)
-listaSimple.eliminarInicio()
+#listaSimple.insertarPosicion(n4,n2)
+#listaSimple.eliminarSeleccion(n2)
+#listaSimple.eliminarFinal()
 listaSimple.imprimir()
+listaSimple.tamano()
