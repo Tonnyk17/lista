@@ -55,7 +55,10 @@ class listaEnlazada:
     def eliminarInicio(self):
         if self._raiz ==None:
             return False
-            
+        else:
+            siguiente = self._raiz
+            while siguiente != None:
+                print(siguiente._dato)
 
 n1=nodo(5)
 n2=nodo(6)
