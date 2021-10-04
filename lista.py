@@ -9,160 +9,243 @@ class nodo:
         self._next=None
         self._inicio=None
 class listaEnlazada:
-    _raiz=None
-    _q=None
-    _longitud=0
+    _head=None
+    _length=0
     def __init__(self):
-        self._raiz=None
-        self._longitud=0
+        self._head=None
+        self._length=0
 
-    def insertar(self,nuevo_nodo):
-        self._longitud+=1
+    def add(self):
+        nuevo_nodo =int(input('Ingresa el valor del nodo:'))
+        newNode = nodo(nuevo_nodo)
+        self._length+=1
         
-        if self._raiz ==None:
-            self._raiz=nuevo_nodo
+        if self._head ==None:
+            self._head=newNode
             
         else:
-            siguiente=self._raiz
-            while siguiente._next != None:
-                siguiente=siguiente._next
-            siguiente._next=nuevo_nodo
+            p=self._head
+            while p._next != None:
+                p=p._next
+            p._next=newNode
+        
 
-    def insertarInicio(self,nuevo_nodo):
-            nuevo_nodo._next =self._raiz 
-            self._raiz = nuevo_nodo
+    def addStart(self):
+            nuevo_nodo =int(input('Ingresa el valor del nodo:'))
+            newNode = nodo(nuevo_nodo)
+            newNode._next =self._head 
+            self._head = newNode
 
-    def imprimir(self):
-        siguiente=self._raiz
-        while siguiente != None:
-            print(siguiente._dato)
-            siguiente=siguiente._next
+    def deploy(self):
+        p=self._head
+        while p != None:
+            print(p._dato)
+            p=p._next
             
 
-    def tamano(self):
-        print("Longitud de la lista:",self._longitud)
+    def size(self):
+        print("Longitud de la lista:",self._length)
 
-    def eliminarSeleccion(self,eliminar_nodo):
-        if self._longitud == 0:
+    def deleteSelection(self):
+        eliminar_nodo = int(input('Ingresa el elemento a eliminar:'))
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-            siguiente = self._raiz
-            while siguiente._next != eliminar_nodo:
-                if siguiente._next == None:
+            p = self._head
+            while p._next != eliminar_nodo:
+                if p._next == None:
                     return False
                 else:
-                    siguiente = siguiente._next
-            eliminar = siguiente._next
-            siguiente._next = eliminar._next
-            self._longitud -= 1
+                    p = p._next
+            eliminar = p._next
+            p._next = eliminar._next
+            self._length -= 1
     
-    def eliminarFinal(self):
-        if self._longitud == 0:
+    def deleteLast(self):
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-            siguiente = self._raiz
+            p = self._head
 
-            while siguiente._next != None:
+            while p._next != None:
                 
-                eliminar = siguiente
-                siguiente = siguiente._next
-            if siguiente != None:
-                eliminar._next = siguiente._next
-            self._longitud -=1
+                eliminar = p
+                p = p._next
+            if p != None:
+                eliminar._next = p._next
+            self._length -=1
 
-    def insertarPosicion(self,nuevo_nodo,posicion):
-        if posicion ==1:
-            nuevo_nodo._next = self._raiz
-            self._raiz = nuevo_nodo
+    def addPosition(self):
+        position = int(input('Ingresa la posicion:'))
+        nuevo_nodo = int(input('Ingresa el valor del elemento:'))
+        newNode = nodo(nuevo_nodo)
+        if position ==1:
+            newNode._next = self._head
+            self._head = newNode
         i = 1
-        n = self._raiz
-        while posicion - 1 > i and n != None:
+        n = self._head
+        while position - 1 > i and n != None:
             n = n._next
             i = i+1
         if n == None:
             return False
         else:
-            nuevo_nodo._next = n._next
-            n._next = nuevo_nodo
+            newNode._next = n._next
+            n._next = newNode
         
-    def eliminarInicio(self):
-        if self._raiz == None:
+    def deleteStart(self):
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-            self._raiz = self._raiz._next        
-            self._longitud -= 1
+            self._head = self._head._next        
+            self._length -= 1
 
-    def invertir(self):
-        if self._raiz == None:
+    def reverse(self):
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-            siguiente = anterior = None
-            aux = self._raiz
+            p = anterior = None
+            aux = self._head
             while aux:
-                siguiente = aux._next
+                p = aux._next
                 aux._next = anterior
                 anterior = aux
-                aux = siguiente
-            self._raiz = anterior
+                aux = p
+            self._head = anterior
 
-    def burbuja(self):
-        if self._raiz == None:
+    def search(self):
+        value = int(input('Ingresa el valor a buscar:'))
+        searchNode = nodo(value)
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-           siguiente = self._raiz
-           while siguiente._next != None:
-               q = siguiente._next
-               while q != None:
-                   if siguiente._dato > q._dato:
-                       aux = siguiente._dato
-                       siguiente._dato = q._dato
-                       q._dato= aux
-
-    def buscar(self,valor):
-        if self._raiz == None:
-            return False
-        else:
-            siguiente = self._raiz
-            while siguiente != None:
-                if siguiente._dato == valor._dato:
+            p = self._head
+            while p != None:
+                if p._dato == searchNode._dato:
                     print('Valor encontrado')
                     return True
-                siguiente = siguiente._next
+                p = p._next
             print('Valor no encontrado')
            
-    def reemplazar(self,valor,posicion):
-        if self._raiz == None:
+    def replace(self):
+        position = int(input('Ingresa la posicion:'))
+        value = int(input('Ingresa el valor a agregar'))
+        replaceNode = nodo(value)
+        if self._length == 0:
+            print('La lista esta vacia')
             return False
         else:
-            if posicion >= 0 and self._longitud > posicion:
-                siguiente = self._raiz
+            if position >= 0 and self._length > position:
+                p = self._head
 
-                for i in range(posicion):
-                    siguiente = siguiente._next
-                siguiente._dato =valor._dato
+                for i in range(position):
+                    p = p._next
+                p._dato =replaceNode._dato
 
-    def concatenar(self,lista):
-        print(lista)
-                
+    def concat(self,lista):
+        p = self._head
+        while p._next != None:
+            p = p._next
+        p._next = lista._head
+        self._length += lista._length
+
+    def inter(self,lista):
+        if self._length == 0:
+            print('La lista esta vacia')
+            return False
+        else:
+            p = self._head
+            q = lista._head
+            while p._next != None and q._next != None:
+                aux = q._next
+                q._next = p._next
+                p._next = q
+                p = q._next
+                q = aux
+            if p._next == None:
+                p._next =q
+            elif p._next != None and  q._next == None:
+                q._next = p._next
+                p._next = q
+
+    def deleteRepeats(self):
+        value = int(input('Ingresa el valor repetido:'))
+        deleteNode = nodo(value)
+        if self._length == 0:
+            print('La lista esta vacia')
+            return False
+        else:
+            p = self._head
+            q = self._head
+            while p != None:
+                if p._dato == deleteNode._dato:
+                    self._length -= 1
+                    if p == self._head:
+                        self._head = self._next
+                        p = self._head
+                    else:
+                        q._next = p._next
+                        p = q._next
+                else:
+                    q = p
+                    p = p._next
+
+def main():
+    lista = listaEnlazada()
+    salir = False
+    
+    while not salir:
+        options = ['Salir','Agregar nodo','Agregar nodo al inicio','Eliminar nodo al final','Eliminar nodo al inicio','Eliminar nodo especifico','Eliminar repetidos','Reemplazar elemento','Imprimir lista','Longitud de la lista','Buscar nodo','Invertir lista','Concatenar lista','Intercalar lista']
+        for i in range(len(options)):
+            print('[',i,']',options[i])
         
-n1=nodo(5)
-n2=nodo(6)
-n3=nodo(29)
-n4=nodo(123)
+        optionSelected = int(input("Selecciona una opcion: "))
+        os.system('clear')
+        if optionSelected == 0:
+            salir = True
+        elif optionSelected == 1:
+            lista.add()
+        elif optionSelected == 2:
+            lista.addStart()
+        elif optionSelected == 3:
+            lista.deleteLast()
+        elif optionSelected == 4:
+            lista.deleteStart()
+        elif optionSelected == 5:
+            lista.deleteSelection()
+        elif optionSelected == 6:
+            lista.deleteRepeats()
+        elif optionSelected == 7:
+            lista.replace()
+        elif optionSelected == 8:
+            lista.deploy()
+        elif optionSelected == 9:
+            lista.size()
+        elif optionSelected == 10:
+            lista.search()
+        elif optionSelected == 11:
+            lista.reverse()
+            lista.deploy()
+        elif optionSelected == 12:
+            print('Ingresa 5 elementos para la segunda lista')
+            lista_2 = listaEnlazada()
+            for i in range(5):
+                lista_2.add()
+            lista.concat(lista_2)
+            lista.deploy()
+        elif optionSelected == 13:
+            print('Ingresa 5 elementos para la segunda lista')
+            lista_2 = listaEnlazada()
+            for i in range(5):
+                lista_2.add()
+            lista.inter(lista_2)
+            lista.deploy()
+        else:
+            print('Selecciona una opcion valida')
+main()
 
-listaSimple = listaEnlazada()
-listaSimple.insertar(n1)
-listaSimple.insertar(n2)
-listaSimple.insertar(n3)
-#listaSimple.insertarInicio(n4)
-#listaSimple.eliminarInicio()
-#listaSimple.insertarPosicion(n4,2)
-#listaSimple.eliminarSeleccion(n2)
-#listaSimple.eliminarFinal()
-#listaSimple.burbuja()
-listaSimple.reemplazar(n4,1)
-#listaSimple.invertir()
-listaSimple.imprimir()
-listaSimple.tamano()
-lista2 = listaEnlazada()
-listaSimple.concatenar(lista2)
