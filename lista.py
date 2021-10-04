@@ -140,7 +140,9 @@ class listaEnlazada:
                 for i in range(posicion):
                     siguiente = siguiente._next
                 siguiente._dato =valor._dato
-                
+
+    def concatenar(self,lista):
+        print(lista)
                 
         
 n1=nodo(5)
@@ -162,3 +164,5 @@ listaSimple.reemplazar(n4,1)
 #listaSimple.invertir()
 listaSimple.imprimir()
 listaSimple.tamano()
+lista2 = listaEnlazada()
+listaSimple.concatenar(lista2)
